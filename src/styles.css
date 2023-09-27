@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~destyle.css/destyle';
+@import 'assets/fonts';
+
+html {
+    height: 100%;
+    height: -webkit-fill-available;
+    scroll-behavior: smooth;
+    @include scrollbar-custom;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+    font-family: 'Helvetica', sans-serif;
+}
+
+body {
+    background: #EEF0F8;
+}
