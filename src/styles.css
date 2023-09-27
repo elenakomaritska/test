@@ -1,5 +1,5 @@
 @import '~destyle.css/destyle';
-@import 'assets/fonts';
+@import 'fonts.css';
 
 html {
     height: 100%;
@@ -11,6 +11,7 @@ html {
     text-rendering: optimizeLegibility;
     font-feature-settings: 'liga';
     font-family: 'Helvetica', sans-serif;
+    font-weight: normal;
 }
 
 body {

@@ -1,11 +1,11 @@
-import { UserAdvertComponent } from './containers/user-advert/user-advert.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { UsersPageComponent } from './containers/users-page/users-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserAdvertComponent,
+    component: UsersPageComponent,
   },
 ];
 

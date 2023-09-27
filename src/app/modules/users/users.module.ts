@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserAdvertComponent } from './containers/user-advert/user-advert.component';
-import { UsersClientModule } from './containers/user-client/user-client.module';
 import { UsersRoutingModule } from './users-routing.module';
 import { UserModule } from './components/user/user.module';
+import { UsersPageComponent } from './containers/users-page/users-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UniqueUsernameValidatorDirective } from '../../directives/unique-username-validator.directive';
 
 @NgModule({
   declarations: [
-    UserAdvertComponent,
+    UsersPageComponent,
+    UniqueUsernameValidatorDirective
   ],
   exports: [
-    UserAdvertComponent
+    UsersPageComponent
   ],
   imports: [
     CommonModule,
-    UsersClientModule,
     UsersRoutingModule,
     UserModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class UsersModule { }

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { UserService } from '../modules/users/users.service';
+import { UserService } from '../services/users.service';
 
 @Directive({
   selector: '[unique-username-validator]',

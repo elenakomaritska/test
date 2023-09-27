@@ -1,1 +1,258 @@
-<p>users-page works!</p>
+<div class="users-page">
+  <div class="users-page__messages">
+    <span
+      class="users-page__message users-page__message--error"
+      [class.is-hide]="!isShowError"
+    >
+      Error message
+    </span>
+
+    <span
+      class="users-page__message users-page__message--success"
+      [class.is-hide]="!isShowSuccess"
+    >
+      Success message
+    </span>
+  </div>
+
+  <div class="users-page__container">
+
+    <div class="users-page__inner">
+      <button
+        class="users-page__button button"
+        (click)="showCreateForm()"
+      >
+        Create User
+      </button>
+
+      <div class="users-page__headings">
+        <span class="users-page__headings-item">Username</span>
+        <span class="users-page__headings-item">First name</span>
+        <span class="users-page__headings-item">Last name</span>
+        <span class="users-page__headings-item">Email</span>
+        <span class="users-page__headings-item">Type</span>
+      </div>
+
+      <ul class="users-page__list">
+        <li
+          *ngFor="let user of users"
+          class="users-page__item"
+          [class.is-active]="user == activeUser"
+          (click)="onSelectUser(user, $event)"
+        >
+          <span class="users-page__item-content">{{ user.username }}</span>
+          <span class="users-page__item-content">{{ user.firstName || user.name }}</span>
+          <span class="users-page__item-content">{{ user.lastName }}</span>
+          <span class="users-page__item-content">{{ user.email }}</span>
+          <span class="users-page__item-content">{{ user.type }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      *ngIf="isChangeFormActive || isCreateFormActive"
+      class="users-page__modal"
+    >
+      <h2
+        *ngIf="isCreateFormActive"
+        class="users-page__modal-title"
+      >
+        Create new user
+      </h2>
+
+      <h2
+        *ngIf="isChangeFormActive"
+        class="users-page__modal-title"
+      >
+        {{ form.get('userName').value }}
+      </h2>
+
+      <button
+        class="users-page__close"
+        type="button"
+        (click)="closeModal()"
+      ></button>
+
+      <form
+        #ngForm="ngForm"
+        class="users-page__form"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+      >
+        <label class="users-page__label">
+          Username*
+          <input
+            class="users-page__input"
+            [class.error]="form.get('userName').invalid && form.get('userName').touched"
+            type="text"
+            name="userName"
+            unique-username-validator
+            formControlName="userName"
+          >
+          <div
+            *ngIf="form.get('userName').invalid && form.get('userName').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <label class="users-page__label">
+          First name*
+          <input
+            class="users-page__input"
+            [class.error]="form.get('firstName').invalid && form.get('firstName').touched"
+            type="text"
+            name="firstName"
+            formControlName="firstName"
+          >
+          <div
+            *ngIf="form.get('firstName').invalid  && form.get('firstName').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <label class="users-page__label">
+          Last name*
+          <input
+            class="users-page__input"
+            [class.error]="form.get('lastName').invalid && form.get('lastName').touched"
+            type="text"
+            name="lastName"
+            formControlName="lastName"
+          >
+          <div
+            *ngIf="form.get('lastName').invalid && form.get('lastName').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <label class="users-page__label">
+          Email*
+          <input
+            class="users-page__input"
+            [class.error]="form.get('userEmail').invalid && form.get('userEmail').touched"
+            type="email"
+            name="userEmail"
+            formControlName="userEmail"
+          >
+          <div
+            *ngIf="form.get('userEmail').invalid && form.get('userEmail').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <label class="users-page__label users-page__label--select">
+          Type*
+          <select
+            class="users-page__select"
+            [class.error]="form.get('userType').invalid && form.get('userType').touched"
+            name="userType"
+            #type
+            formControlName="userType"
+          >
+            <option
+              class="users-page__option"
+              value="Admin"
+            >
+              Admin
+            </option>
+            <option
+              class="users-page__option"
+              value="Driver"
+            >
+              Driver
+            </option>
+          </select>
+
+          <div
+            *ngIf="form.get('userType').invalid && form.get('userType').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <label class="users-page__label">
+          Password*
+          <input
+            class="users-page__input"
+            [class.error]="form.get('password').invalid && form.get('password').touched"
+            type="password"
+            name="password"
+            formControlName="password"
+          />
+
+          <div
+            *ngIf="form.get('password').invalid && form.get('password').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <label class="users-page__label">
+          Repeat password*
+          <input
+            class="users-page__input"
+            [class.error]="form.get('repeatPassword').invalid && form.get('repeatPassword').touched"
+            type="password"
+            name="repeatUserPassword"
+            formControlName="repeatPassword"
+            pattern="{{ form.get('password').value }}"
+          />
+
+          <div
+            *ngIf="form.get('repeatPassword').invalid && form.get('repeatPassword').touched"
+            class="users-page__error"
+          >
+            Error message
+          </div>
+        </label>
+
+        <div
+          class="users-page__action"
+          [class.users-page__action--centered]="isCreateFormActive"
+        >
+          <button
+            *ngIf="isChangeFormActive"
+            class="users-page__action-button button button--delete"
+            type="button"
+            (click)="removeUser()"
+          >
+            Delete
+          </button>
+
+          <button
+            *ngIf="isChangeFormActive"
+            class="users-page__action-button button"
+            type="submit"
+            [disabled]="ngForm.invalid || !ngForm.touched"
+            (click)="saveUser()"
+          >
+            Save
+          </button>
+
+          <button
+            *ngIf="isCreateFormActive"
+            class="users-page__action-button  button"
+            type="submit"
+            [disabled]="ngForm.invalid"
+            (click)="addUser()"
+          >
+            Create
+          </button>
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.button{
+  padding: 14px 22px;
+  min-width: 120px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  background: #2E8FF0 ;
+  box-shadow: 0 5px 8px #2E8FF029;
+  border-radius: 6px;
+  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 13px;
+  
+  &--delete {
+    background: #F44682;
+    box-shadow: 0 5px 8px #F4468229;
+  }
+  
+  &:disabled{
+    background: #A4A4B5;
+  }
+}
