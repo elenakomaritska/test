@@ -18,22 +18,22 @@ export interface User {
 @Injectable({providedIn:'root'})
 
 export class UserService{
-  constructor(private http:HttpClient ) {}
+  constructor(private _http:HttpClient ) {}
 
   public fetchUsers():Observable<User[]>{
-    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users')
+    return this._http.get<User[]>('https://jsonplaceholder.typicode.com/users')
   }
 
   public addUser(user:User):Observable<User> {
-    return this.http.post<User>('https://jsonplaceholder.typicode.com/users', user)
+    return this._http.post<User>('https://jsonplaceholder.typicode.com/users', user)
   }
 
   public removeUser(id:number):Observable<void> {
-    return this.http.delete<void>(`https://jsonplaceholder.typicode.com/users/${ id }`)
+    return this._http.delete<void>(`https://jsonplaceholder.typicode.com/users/${ id }`)
   }
 
   public userExists(username: string): Observable<boolean> {
-    return this.http
+    return this._http
       .get<User[]>('https://jsonplaceholder.typicode.com/users', { params: { username } })
       .pipe(map((matchingUsers) => matchingUsers.length > 0));
   }

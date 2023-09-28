@@ -24,13 +24,13 @@ export class UniqueUsernameValidatorDirective implements AsyncValidator {
   private static readonly USERNAME_DUPLICATED = { usernameDuplicated: true };
   private static readonly USERNAME_NOT_DUPLICATED = null;
 
-  constructor(private userService: UserService) {}
+  constructor(private _userService: UserService) {}
 
   validate(
     control: AbstractControl
   ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     const username = control.value;
-    return this.userService.userExists(username).pipe(
+    return this._userService.userExists(username).pipe(
       map((exists) =>
         exists
           ? UniqueUsernameValidatorDirective.USERNAME_DUPLICATED

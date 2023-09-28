@@ -26,7 +26,7 @@ export class UsersPageComponent implements OnInit {
 
   constructor(
     private _fb: UntypedFormBuilder,
-    private userService: UserService,
+    private _userService: UserService,
   ) {
   }
 
@@ -36,14 +36,14 @@ export class UsersPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this._initializeForm();
-    this.userService.fetchUsers()
+    this._userService.fetchUsers()
       .subscribe((response: User[]) => {
         this.users = response;
       });
   }
 
   public addUser() {
-    this.userService.addUser({
+    this._userService.addUser({
       username: this.f['userName'].value,
       lastName: this.f['lastName'].value,
       email: this.f['userEmail'].value,
@@ -57,7 +57,7 @@ export class UsersPageComponent implements OnInit {
   }
 
   public removeUser(): void {
-    this.userService.removeUser(this.activeUser.id)
+    this._userService.removeUser(this.activeUser.id)
       .subscribe(() => {
         this.users = this.users.filter(user => user.id !== this.activeUser.id);
       });
