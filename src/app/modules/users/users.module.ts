@@ -4,11 +4,13 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersPageComponent } from './containers/users-page/users-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UniqueUsernameValidatorDirective } from '../../directives/unique-username-validator.directive';
+import { SplitAndGetPipe } from '../../pipes/split-and-get.pipe';
 
 @NgModule({
   declarations: [
     UsersPageComponent,
-    UniqueUsernameValidatorDirective
+    UniqueUsernameValidatorDirective,
+    SplitAndGetPipe
   ],
   exports: [
     UsersPageComponent

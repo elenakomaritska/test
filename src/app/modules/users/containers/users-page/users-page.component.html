@@ -41,8 +41,15 @@
           (click)="onSelectUser(user, $event)"
         >
           <span class="users-page__item-content">{{ user.username }}</span>
-          <span class="users-page__item-content">{{ user.firstName || user.name }}</span>
-          <span class="users-page__item-content">{{ user.lastName }}</span>
+
+          <span class="users-page__item-content">
+            {{ user.firstName ? user.firstName : user.name | splitAndGet:" ":1 }}
+          </span>
+
+          <span class="users-page__item-content">
+            {{ user.lastName ? user.lastName : user.name | splitAndGet:" ":2 }}
+          </span>
+
           <span class="users-page__item-content">{{ user.email }}</span>
           <span class="users-page__item-content">{{ user.type }}</span>
         </li>
@@ -89,6 +96,7 @@
             unique-username-validator
             formControlName="userName"
           >
+
           <div
             *ngIf="form.get('userName').invalid && form.get('userName').touched"
             class="users-page__error"
@@ -106,6 +114,7 @@
             name="firstName"
             formControlName="firstName"
           >
+
           <div
             *ngIf="form.get('firstName').invalid  && form.get('firstName').touched"
             class="users-page__error"
@@ -123,6 +132,7 @@
             name="lastName"
             formControlName="lastName"
           >
+
           <div
             *ngIf="form.get('lastName').invalid && form.get('lastName').touched"
             class="users-page__error"
@@ -140,6 +150,7 @@
             name="userEmail"
             formControlName="userEmail"
           >
+
           <div
             *ngIf="form.get('userEmail').invalid && form.get('userEmail').touched"
             class="users-page__error"
@@ -163,6 +174,7 @@
             >
               Admin
             </option>
+
             <option
               class="users-page__option"
               value="Driver"
@@ -248,11 +260,9 @@
           >
             Create
           </button>
+
         </div>
-
-
       </form>
     </div>
-
   </div>
 </div>

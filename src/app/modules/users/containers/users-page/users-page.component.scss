@@ -92,8 +92,11 @@
     grid-template-columns: minmax(100px,196px) minmax(100px,205px) minmax(100px,199px)  minmax(100px,264px) minmax(100px,210px);
     gap: 22px;
     background: #f4f5f8;
+    cursor: pointer;
+    transition: background-color 0.3s linear;
     
-    &.is-active{
+    &.is-active,
+    &:hover{
       background: #EFF0F4;
     }
   }
