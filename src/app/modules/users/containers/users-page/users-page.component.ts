@@ -39,10 +39,7 @@ export class UsersPageComponent implements OnInit {
     this.userService.fetchUsers()
       .subscribe((response: User[]) => {
         this.users = response;
-        console.log(this.users)
       });
-
-    console.log(this.users)
   }
 
   public addUser() {
