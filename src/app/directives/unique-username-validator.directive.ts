@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidator,
@@ -21,22 +21,25 @@ import { UserService } from '../services/users.service';
 })
 
 export class UniqueUsernameValidatorDirective implements AsyncValidator {
+  @Input() activeUser: boolean | undefined;
   private static readonly USERNAME_DUPLICATED = { usernameDuplicated: true };
   private static readonly USERNAME_NOT_DUPLICATED = null;
 
   constructor(private _userService: UserService) {}
 
   validate(
-    control: AbstractControl
+    control: AbstractControl,
   ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    const username = control.value;
+    const username = control.dirty  && !this.activeUser ? control.value : '';
+
     return this._userService.userExists(username).pipe(
       map((exists) =>
         exists
           ? UniqueUsernameValidatorDirective.USERNAME_DUPLICATED
-          : UniqueUsernameValidatorDirective.USERNAME_NOT_DUPLICATED
+          : UniqueUsernameValidatorDirective.USERNAME_NOT_DUPLICATED,
       ),
-      first()
+      first(),
     );
+
   }
 }

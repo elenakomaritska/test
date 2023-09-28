@@ -90,15 +90,16 @@
           Username*
           <input
             class="users-page__input"
-            [class.error]="form.get('userName').invalid && form.get('userName').touched"
+            [class.error]="(form.get('userName').invalid && form.get('userName').touched) || (form.get('userName').invalid && isShowError)"
             type="text"
             name="userName"
             unique-username-validator
+            [activeUser]="isChangeFormActive"
             formControlName="userName"
           >
 
           <div
-            *ngIf="form.get('userName').invalid && form.get('userName').touched"
+            *ngIf="(form.get('userName').invalid && form.get('userName').touched) || (form.get('userName').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -109,14 +110,14 @@
           First name*
           <input
             class="users-page__input"
-            [class.error]="form.get('firstName').invalid && form.get('firstName').touched"
+            [class.error]="(form.get('firstName').invalid  && form.get('firstName').touched) || (form.get('firstName').invalid && isShowError)"
             type="text"
             name="firstName"
             formControlName="firstName"
           >
 
           <div
-            *ngIf="form.get('firstName').invalid  && form.get('firstName').touched"
+            *ngIf="(form.get('firstName').invalid  && form.get('firstName').touched) || (form.get('firstName').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -127,14 +128,14 @@
           Last name*
           <input
             class="users-page__input"
-            [class.error]="form.get('lastName').invalid && form.get('lastName').touched"
+            [class.error]="(form.get('lastName').invalid && form.get('lastName').touched) || (form.get('lastName').invalid && isShowError)"
             type="text"
             name="lastName"
             formControlName="lastName"
           >
 
           <div
-            *ngIf="form.get('lastName').invalid && form.get('lastName').touched"
+            *ngIf="(form.get('lastName').invalid && form.get('lastName').touched) || (form.get('lastName').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -145,14 +146,14 @@
           Email*
           <input
             class="users-page__input"
-            [class.error]="form.get('userEmail').invalid && form.get('userEmail').touched"
+            [class.error]="(form.get('userEmail').invalid && form.get('userEmail').touched) || (form.get('userEmail').invalid && isShowError)"
             type="email"
             name="userEmail"
             formControlName="userEmail"
           >
 
           <div
-            *ngIf="form.get('userEmail').invalid && form.get('userEmail').touched"
+            *ngIf="(form.get('userEmail').invalid && form.get('userEmail').touched) || (form.get('userEmail').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -163,7 +164,7 @@
           Type*
           <select
             class="users-page__select"
-            [class.error]="form.get('userType').invalid && form.get('userType').touched"
+            [class.error]="(form.get('userType').invalid && form.get('userType').touched) || (form.get('userType').invalid && isShowError)"
             name="userType"
             #type
             formControlName="userType"
@@ -184,7 +185,7 @@
           </select>
 
           <div
-            *ngIf="form.get('userType').invalid && form.get('userType').touched"
+            *ngIf="(form.get('userType').invalid && form.get('userType').touched) || (form.get('userType').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -195,14 +196,14 @@
           Password*
           <input
             class="users-page__input"
-            [class.error]="form.get('password').invalid && form.get('password').touched"
+            [class.error]="(form.get('password').invalid && form.get('password').touched) || (form.get('password').invalid && isShowError)"
             type="password"
             name="password"
             formControlName="password"
           />
 
           <div
-            *ngIf="form.get('password').invalid && form.get('password').touched"
+            *ngIf="(form.get('password').invalid && form.get('password').touched) || (form.get('password').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -213,7 +214,7 @@
           Repeat password*
           <input
             class="users-page__input"
-            [class.error]="form.get('repeatPassword').invalid && form.get('repeatPassword').touched"
+            [class.error]="(form.get('repeatPassword').invalid && form.get('repeatPassword').touched) || (form.get('repeatPassword').invalid && isShowError)"
             type="password"
             name="repeatUserPassword"
             formControlName="repeatPassword"
@@ -221,7 +222,7 @@
           />
 
           <div
-            *ngIf="form.get('repeatPassword').invalid && form.get('repeatPassword').touched"
+            *ngIf="(form.get('repeatPassword').invalid && form.get('repeatPassword').touched) || (form.get('repeatPassword').invalid && isShowError)"
             class="users-page__error"
           >
             Error message
@@ -245,7 +246,6 @@
             *ngIf="isChangeFormActive"
             class="users-page__action-button button"
             type="submit"
-            [disabled]="ngForm.invalid || !ngForm.touched"
             (click)="saveUser()"
           >
             Save
@@ -255,7 +255,6 @@
             *ngIf="isCreateFormActive"
             class="users-page__action-button  button"
             type="submit"
-            [disabled]="ngForm.invalid"
             (click)="addUser()"
           >
             Create

@@ -43,17 +43,19 @@ export class UsersPageComponent implements OnInit {
   }
 
   public addUser() {
-    this._userService.addUser({
-      username: this.f['userName'].value,
-      lastName: this.f['lastName'].value,
-      email: this.f['userEmail'].value,
-      type: this.f['userType'].value,
-      firstName: this.f['firstName'].value,
-      password: this.f['password'].value,
-      repeatPassword: this.f['repeatPassword'].value,
-    }).subscribe((user: User) => {
-      this.users.push(user);
-    });
+    if (this.form.valid) {
+      this._userService.addUser({
+        username: this.f['userName'].value,
+        lastName: this.f['lastName'].value,
+        email: this.f['userEmail'].value,
+        type: this.f['userType'].value,
+        firstName: this.f['firstName'].value,
+        password: this.f['password'].value,
+        repeatPassword: this.f['repeatPassword'].value,
+      }).subscribe((user: User) => {
+        this.users.push(user);
+      });
+    }
   }
 
   public removeUser(): void {
@@ -66,10 +68,15 @@ export class UsersPageComponent implements OnInit {
   }
 
   public saveUser(): void {
-    this.removeUser();
-    this.addUser();
-    this.closeModal();
-    this.isShowSuccess = true;
+    if (this.form.valid) {
+      this.removeUser();
+      this.addUser();
+      this.closeModal();
+      this.isShowSuccess = true;
+      this.isShowError = false;
+    } else {
+      this.isShowError = true;
+    }
   }
 
   public onSelectUser(user: User, event: Event): void {
